@@ -24,25 +24,29 @@
     let canvas = document.getElementById("myCanvas");
     let ctx = canvas.getContext("2d");
 
-    ctx.beginPath();
-    ctx.rect(20, 40, 50, 50); // (left margin, top margin, width px, height px)
-    ctx.fillStyle = "#FF0000";
-    ctx.fill();
-    ctx.closePath();
+    let x = canvas.width / 2;
+    let y = canvas.height - 30;
 
-    console.log(ctx); 
+    let dx = 2; 
+    let dy = -2; 
 
-    ctx.beginPath();
-    ctx.arc(240, 160, 50, 0, Math.PI*2, false); // (x, y, radius, start angle, end angle, clockwise[false] or anti[true])
-    ctx.fillStyle = "green";
-    ctx.fill();
-    ctx.closePath();
+    function drawBall() {
+        ctx.beginPath();
+        ctx.arc(x, y, 10, 0, Math.PI*2);
+        ctx.fillStyle = "#0095DD";
+        ctx.fill();
+        ctx.closePath();
+    }
 
-    ctx.beginPath();
-    ctx.rect(160, 250, 100, 40);
-    ctx.strokeStyle = "rgba(100, 100, 255, 0.5)";
-    ctx.stroke();
-    ctx.closePath();
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        drawBall();
+        x += dx;
+        y += dy;
+    }
+    setInterval(draw, 10);
+
+    draw(); 
 
 </script>
 
