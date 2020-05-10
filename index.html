@@ -42,6 +42,10 @@
     let rightPressed = false;
     let leftPressed = false;
 
+    // score 
+
+    let score = 0; 
+
     // bricks 
 
     let brickRowCount = 3;
@@ -60,7 +64,7 @@
             bricks[c][r] = { 
                 x: 0, 
                 y: 0, 
-                status: 1
+                status: 1  // setting a status to the brick object allows you to track state 
             };
         }
     }
@@ -114,6 +118,7 @@
         collisionDetection();
         drawBall();
         drawPaddle(); 
+        drawScore(); 
         
 
         // checking if exceeds x values of canvas 
@@ -158,6 +163,37 @@
         }
     }
 
+
+    // brick collision -- checking if x ball coord is > x brick && y brick coords ...
+
+    collisionDetection = () => {
+        for(var c=0; c<brickColumnCount; c++) {
+            for(var r=0; r<brickRowCount; r++) {
+                var b = bricks[c][r];
+                if(b.status == 1) {
+                    if(x > b.x && x < b.x+brickWidth && y > b.y && y < b.y+brickHeight) {
+                        dy = -dy;
+                        b.status = 0;
+                        score += 1; 
+                        if(score === brickRowCount*brickColumnCount) {
+                            alert("YOU WIN, CONGRATULATIONS!");
+                            document.location.reload();
+                            clearInterval(interval); // Needed for Chrome to end game
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // draw score function 
+
+    drawScore = () => {
+        ctx.font = "16px Arial";
+        ctx.fillStyle = "#0095DD";
+        ctx.fillText("Score: " + score, 8, 20); // (text, x, y) 
+    }
+
     keyDownHandler = e => {
         if(e.key == "Right" || e.key == "ArrowRight") { // right and left supports IE / Edge 
             rightPressed = true;
@@ -176,24 +212,16 @@
         }
     }
 
-    // brick collision -- checking if x ball coord is > x brick && y brick coords ...
-
-    collisionDetection = () => {
-        for(var c=0; c<brickColumnCount; c++) {
-            for(var r=0; r<brickRowCount; r++) {
-                var b = bricks[c][r];
-                if(b.status == 1) {
-                    if(x > b.x && x < b.x+brickWidth && y > b.y && y < b.y+brickHeight) {
-                        dy = -dy;
-                        b.status = 0;
-                    }
-                }
-            }
+    mouseMoveHandler = e => {
+        let relativeX = e.clientX - canvas.offsetLeft;
+        if(relativeX > 0 && relativeX < canvas.width) {
+            paddleX = relativeX - paddleWidth/2;
         }
     }
 
     document.addEventListener("keydown", keyDownHandler, false);
     document.addEventListener("keyup", keyUpHandler, false);
+    document.addEventListener("mousemove", mouseMoveHandler, false);
 
    
 
