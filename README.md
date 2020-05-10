@@ -1,5 +1,7 @@
 # Arcade Game
 
+![Game](/atari_breakout.gif)
+
 ## About 
 
 A copy of the Atari Breakout game released in 1976. Written using vanilla JS and the `canvas` element. 
