@@ -1,4 +1,4 @@
-# Arcade Game
+# Arcade Game :video_game:
 
 ![Game](/atari_breakout.gif)
 
@@ -12,8 +12,14 @@ A copy of the Atari Breakout game released in 1976. Written using vanilla JS and
 ```bash
 git clone {url} {foldername}
 ```
+
 2. Install `npm`. 
 ```bash
 npm install
 ```
 
+## Controls 
+
+:arrow_backward: left   
+:arrow_forward: right   
+OR mouse enabled 

@@ -10,11 +10,11 @@
     let paddleWidth = 75;
     let paddleX = (canvas.width-paddleWidth) / 2;
 
-    let dx = 2; 
-    let dy = -2; 
+    let dx = 4; 
+    let dy = -4; 
 
     let ballRadius = 10; 
-    let ballColor = "#0095DD"; 
+    let gameColor = "red"; 
 
     let rightPressed = false;
     let leftPressed = false;
@@ -22,13 +22,13 @@
     let score = 0; 
     let lives = 3; 
 
-    let brickRowCount = 3;
-    let brickColumnCount = 5;
+    let brickRowCount = 10;
+    let brickColumnCount = 11;
     let brickWidth = 75;
     let brickHeight = 20;
     let brickPadding = 10;
     let brickOffsetTop = 30;
-    let brickOffsetLeft = 30;
+    let brickOffsetLeft = 15;
 
     let bricks = [];
 
@@ -46,7 +46,7 @@
     drawBall = () => {
         ctx.beginPath();
         ctx.arc(x, y, ballRadius, 0, Math.PI*2);
-        ctx.fillStyle = ballColor; 
+        ctx.fillStyle = gameColor; 
         ctx.fill();
         ctx.closePath();
     }
@@ -54,7 +54,7 @@
     drawPaddle = () => {
         ctx.beginPath();
         ctx.rect(paddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight);
-        ctx.fillStyle = "#0095DD";
+        ctx.fillStyle = gameColor;
         ctx.fill();
         ctx.closePath();
     }
@@ -69,7 +69,7 @@
                     bricks[c][r].y = brickY;
                     ctx.beginPath();
                     ctx.rect(brickX, brickY, brickWidth, brickHeight);
-                    ctx.fillStyle = "#0095DD";
+                    ctx.fillStyle = gameColor;
                     ctx.fill();
                     ctx.closePath();
                 }
@@ -94,7 +94,7 @@
             dy = -dy;
         } else if(y + dy > canvas.height-ballRadius) {
             if(x > paddleX && x < paddleX + paddleWidth) {
-                dy = -dy;
+                dy = -dy * 1.05;
             } else {
                 lives--;
                 if(!lives) {
@@ -103,8 +103,8 @@
                 } else {
                     x = canvas.width/2;
                     y = canvas.height-30;
-                    dx = 2;
-                    dy = -2;
+                    dx = 4;
+                    dy = -4;
                     paddleX = (canvas.width-paddleWidth)/2;
                 }
             }
@@ -150,13 +150,13 @@
 
     drawScore = () => {
         ctx.font = "16px Arial";
-        ctx.fillStyle = "#0095DD";
+        ctx.fillStyle = gameColor;
         ctx.fillText("Score: " + score, 8, 20);
     }
 
     drawLives = () => {
         ctx.font = "16px Arial";
-        ctx.fillStyle = "#0095DD";
+        ctx.fillStyle = gameColor;
         ctx.fillText("Lives: " + lives, canvas.width - 65, 20);
     }
 
