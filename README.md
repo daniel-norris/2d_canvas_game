@@ -4,7 +4,7 @@
 
 ## About 
 
-A copy of the Atari Breakout game released in 1976. Written using vanilla JS and the `canvas` element. 
+A copy of the Atari Breakout game released in 1976. Exercise on revisiting vanilla JS and exploring uses for the `canvas` element for the first time. 
 
 ## Install 
 
