@@ -6,6 +6,8 @@
 
 A copy of the Atari Breakout game released in 1976. Exercise on revisiting vanilla JS and exploring uses for the `canvas` element for the first time. 
 
+https://daniel-norris.github.io/2d_canvas_game/ 
+
 ## Install 
 
 1. Clone the repo. 
